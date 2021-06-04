@@ -97,15 +97,17 @@ int main(int *argsc, char **argsv)
     readVigenereKey(keyText, key);
     printf("\n\nVigenere Key:\n\n");
     printf("%s", key);
+    printf("\n");
 
     char plain[512];
     readPlainText(plainText, plain);
-    printf("\n\nPlaintext:\n\n");
+    printf("\n\nPlaintext:\n");
     print80PerLine(plain);
+    printf("\n");
 
     char cipher[512];
     readCiphertext(plain, key, cipher);
-    printf("\n\nCiphertext:\n\n");
+    printf("\n\nCiphertext:\n");
     print80PerLine(cipher);
 
     printf("\n");
