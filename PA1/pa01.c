@@ -40,11 +40,14 @@ void readPlainText(FILE *plainText, char *plain)
     int i = 0;
     char temp;
 
-    while ((temp = fgetc(plainText)) != EOF)
-        if (isalpha(temp))
-            plain[i++] = tolower(temp);
-    while (i < MAXLEN)
-        plain[i++] = 'x';
+    while (i < 512)
+    {
+        while ((temp = fgetc(plainText)) != EOF)
+            if (isalpha(temp))
+                plain[i++] = tolower(temp);
+        while (i < MAXLEN)
+            plain[i++] = 'x';
+    }
 }
 
 void printVigenere(char *key)
