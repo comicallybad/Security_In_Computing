@@ -78,7 +78,7 @@ void print80PerLine(char *plain)
 
 void readCiphertext(char *plain, char *key, char *cipher)
 {
-    for (int i = 0, j = 0; i <= strlen(plain); i++)
+    for (int i = 0, j = 0; i < strlen(plain); i++)
         if (plain[i] >= 'a' && plain[i] <= 'z')
         {
             cipher[i] = ((char)((plain[i] + key[j] - 2 * 'a') % 26 + 'a'));
