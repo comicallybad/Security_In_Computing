@@ -19,7 +19,6 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <math.h>
 #include <ctype.h>
 
 #define MAXLEN 512
@@ -108,6 +107,8 @@ int main(int *argsc, char **argsv)
     readCiphertext(plain, key, cipher);
     printf("\n\nCiphertext:\n\n");
     print80PerLine(cipher);
+
+    printf("\n");
 
     fclose(keyText);
     fclose(plainText);
