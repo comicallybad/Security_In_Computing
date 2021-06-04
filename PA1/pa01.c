@@ -4,7 +4,7 @@
 |     Author:  John Seredick
 |     Language:  c
 |
-|   To Compile: gcc pa01.c -o pa01 -lm
+|   To Compile: gcc -o pa01  pa01.c
 |
 |   To Execute: c  -> ./pa01 kX.txt pX.txt
 |                         where kX.txt is the keytext file
@@ -14,7 +14,7 @@
 |
 |     Class:  CIS3360 - Security in Computing - Summer 2021
 |     Instructor:  McAlpin
-|     Due Date:  per assignment
+|     Due Date:  Jun 27
 |+=============================================================================*/
 
 #include <stdlib.h>
