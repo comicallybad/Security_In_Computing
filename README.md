@@ -26,5 +26,5 @@ TO EASILY ACCESS YOUR VM:
 3. In the project directory run "login.bat" and you will be prompted to enter your password
 
 TO EASILY MOVE FILES FROM YOUR PC TO EUSTIS
-1. To move all .sh files in a directory, cd into the directory, then use: `scp *.sh <NID>@eustis.eecs.ucf.edu:~/<Folder Name/Directory>/` EX: `scp *.sh <NID>@eustis.eecs.ucf.edu:~/PA1/` Notice: exchance <NID> for your NID
-2. To move all files in a directory on your pc, cd into the directory, then use: `scp *.* <NID>@eustis.eecs.ucf.edu:~/<Folder Name/Directory>/` Notice: exchance <NID> for your NID
+1. To move all .sh files in a directory, cd into the directory, then use: `scp *.sh <NID>@eustis.eecs.ucf.edu:~/<Folder Name/Directory>/` EX: `scp *.sh <NID>@eustis.eecs.ucf.edu:~/PA1/` Notice: change `<NID>` for your NID
+2. To move all files in a directory on your pc, cd into the directory, then use: `scp *.* <NID>@eustis.eecs.ucf.edu:~/<Folder Name/Directory>/` Notice: change `<NID>` for your NID
