@@ -108,19 +108,19 @@ int main(int *argsc, char **argsv)
         exit(1);
     }
 
-    char key[MAXLEN] = "";
+    char key[MAXLEN];
     readVigenereKey(keyText, key);
     printf("\n\nVigenere Key:\n\n");
     printVigenere(key);
     printf("\n");
 
-    char plain[MAXLEN] = "";
+    char plain[MAXLEN];
     readPlainText(plainText, plain);
     printf("\n\nPlaintext:\n");
     print80PerLine(plain);
     printf("\n");
 
-    char cipher[MAXLEN] = "";
+    char cipher[MAXLEN];
     readCiphertext(plain, key, cipher);
     printf("\n\nCiphertext:\n");
     print80PerLine(cipher);
