@@ -33,6 +33,7 @@ void readVigenereKey(FILE *keyText, char *key)
         if (isalpha(temp))
             key[i++] = tolower(temp);
     }
+    key[i++] = '\n';
 }
 
 void readPlainText(FILE *keyText, char *plain)
@@ -45,15 +46,32 @@ void readPlainText(FILE *keyText, char *plain)
         if (isalpha(temp))
             plain[i++] = tolower(temp);
     }
-    while (i < 512)
+    while (i < MAXLEN - 1)
     {
         plain[i++] = 'x';
+    }
+    plain[i++] = '\n';
+}
+
+void printVigenere(char *key)
+{
+    int i = 0, j = 0;
+    while (key[i] != '\n')
+    {
+        if (j == 80)
+        {
+            printf("\n");
+            j = 0;
+        }
+        printf("%c", key[i]);
+        i++;
+        j++;
     }
 }
 
 void print80PerLine(char *plain)
 {
-    for (int i = 0; i < 512; i++)
+    for (int i = 0; i < MAXLEN; i++)
     {
         if (i % 80 == 0)
             printf("\n");
@@ -66,9 +84,12 @@ void print80PerLine(char *plain)
 
 void readCiphertext(char *plain, char *key, char *cipher)
 {
-    for (int i = 0, j = 0; i < 512; ++i)
+    for (int i = 0, j = 0; i < MAXLEN; ++i)
         if (plain[i] >= 'a' && plain[i] <= 'z')
+        {
             cipher[i] = ((char)((plain[i] + key[j] - 2 * 'a') % 26 + 'a'));
+            // j = ++j % MAXLEN;
+        }
 }
 
 int main(int *argsc, char **argsv)
@@ -93,19 +114,19 @@ int main(int *argsc, char **argsv)
         exit(1);
     }
 
-    char key[512];
+    char key[MAXLEN];
     readVigenereKey(keyText, key);
     printf("\n\nVigenere Key:\n\n");
-    printf("%s", key);
+    printVigenere(key);
     printf("\n");
 
-    char plain[512];
+    char plain[MAXLEN];
     readPlainText(plainText, plain);
     printf("\n\nPlaintext:\n");
     print80PerLine(plain);
     printf("\n");
 
-    char cipher[512];
+    char cipher[MAXLEN];
     readCiphertext(plain, key, cipher);
     printf("\n\nCiphertext:\n");
     print80PerLine(cipher);
