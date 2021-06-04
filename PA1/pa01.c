@@ -20,6 +20,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <string.h>
 
 #define MAXLEN 512
 
@@ -33,30 +34,29 @@ void readVigenereKey(FILE *keyText, char *key)
         if (isalpha(temp))
             key[i++] = tolower(temp);
     }
-    key[i++] = '\n';
+    key[i++] = '\0';
 }
 
-void readPlainText(FILE *keyText, char *plain)
+void readPlainText(FILE *plainText, char *plain)
 {
     int i = 0;
     char temp;
 
-    while ((temp = fgetc(keyText)) != EOF)
+    while ((temp = fgetc(plainText)) != EOF)
     {
         if (isalpha(temp))
             plain[i++] = tolower(temp);
     }
-    while (i < MAXLEN - 1)
+    while (i < MAXLEN)
     {
         plain[i++] = 'x';
     }
-    plain[i++] = '\n';
 }
 
 void printVigenere(char *key)
 {
     int i = 0, j = 0;
-    while (key[i] != '\n')
+    while (key[i] != '\0')
     {
         if (j == 80)
         {
@@ -84,11 +84,11 @@ void print80PerLine(char *plain)
 
 void readCiphertext(char *plain, char *key, char *cipher)
 {
-    for (int i = 0, j = 0; i < MAXLEN; ++i)
+    for (int i = 0, j = 0; i <= strlen(plain); i++)
         if (plain[i] >= 'a' && plain[i] <= 'z')
         {
             cipher[i] = ((char)((plain[i] + key[j] - 2 * 'a') % 26 + 'a'));
-            // j = ++j % MAXLEN;
+            j = ++j % strlen(key);
         }
 }
 
@@ -114,19 +114,19 @@ int main(int *argsc, char **argsv)
         exit(1);
     }
 
-    char key[MAXLEN];
+    char key[MAXLEN] = "";
     readVigenereKey(keyText, key);
     printf("\n\nVigenere Key:\n\n");
     printVigenere(key);
     printf("\n");
 
-    char plain[MAXLEN];
+    char plain[MAXLEN] = "";
     readPlainText(plainText, plain);
     printf("\n\nPlaintext:\n");
     print80PerLine(plain);
     printf("\n");
 
-    char cipher[MAXLEN];
+    char cipher[MAXLEN] = "";
     readCiphertext(plain, key, cipher);
     printf("\n\nCiphertext:\n");
     print80PerLine(cipher);
