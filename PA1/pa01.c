@@ -30,10 +30,8 @@ void readVigenereKey(FILE *keyText, char *key)
     char temp;
 
     while ((temp = fgetc(keyText)) != EOF)
-    {
         if (isalpha(temp))
             key[i++] = tolower(temp);
-    }
     key[i++] = '\0';
 }
 
@@ -43,14 +41,10 @@ void readPlainText(FILE *plainText, char *plain)
     char temp;
 
     while ((temp = fgetc(plainText)) != EOF)
-    {
         if (isalpha(temp))
             plain[i++] = tolower(temp);
-    }
     while (i < MAXLEN)
-    {
         plain[i++] = 'x';
-    }
 }
 
 void printVigenere(char *key)
