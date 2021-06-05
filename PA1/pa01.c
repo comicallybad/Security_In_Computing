@@ -86,7 +86,7 @@ void readCiphertext(char *plain, char *key, char *cipher)
         }
 }
 
-int main(int *argsc, char **argsv)
+int main(int argsc, char **argsv)
 {
     if (argsc > 3)
     {
