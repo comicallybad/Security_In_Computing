@@ -73,7 +73,7 @@ void print(char *text)
 int main(int argc, char **argv)
 {
     FILE *ifp = fopen(argv[1], "r");
-    char *text, *output, *checksum, count = 'x';
+    char *text, count = 'x';
     unsigned long int EightBit = 0, SixteenBit = 0, ThirtyTwoBit = 0;
 
     int i = 0;
@@ -89,10 +89,7 @@ int main(int argc, char **argv)
     text = malloc(sizeof(char) * 1024);
 
     while (fscanf(ifp, "%c", &count) != EOF && i < 1024)
-    {
-        text[i] = count;
-        i++;
-    }
+        text[i++] = count;
 
     text[i] = '\0';
     fclose(ifp);
