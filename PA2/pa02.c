@@ -34,32 +34,6 @@ int CalcEightBit(char *text)
     return result;
 }
 
-int CalcSixteenBit(char *text, int checksum_size, unsigned long int result)
-{
-    for (int i = 0; i < strlen(text);)
-    {
-        result += text[i] << 8;
-        result += (text[i + 1]);
-        i += 2;
-    }
-    printf("%2d bit checksum is %8lx for all %4d chars\n", checksum_size, result & 0xffff, (int)strlen(text));
-    return result;
-}
-
-int CalcThirtyTwoBit(char *text, int checksum_size, unsigned long int result)
-{
-    for (int i = 0; i < strlen(text);)
-    {
-        result += text[i] << 24;
-        result += (text[i + 1]) << 16;
-        result += (text[i + 2]) << 8;
-        result += (text[i + 3]);
-        i += 4;
-    }
-    printf("%2d bit checksum is %8lx for all %4d chars\n", checksum_size, result & 0xffffffff, (int)strlen(text));
-    return result;
-}
-
 void print(char *text)
 {
     for (int i = 0; i < strlen(text); i++)
@@ -73,7 +47,7 @@ void print(char *text)
 int main(int argc, char **argv)
 {
     FILE *ifp = fopen(argv[1], "r");
-    char *text, count = 'x';
+    char *text, *output, *checksum, count = 'x';
     unsigned long int EightBit = 0, SixteenBit = 0, ThirtyTwoBit = 0;
 
     int i = 0;
@@ -89,7 +63,10 @@ int main(int argc, char **argv)
     text = malloc(sizeof(char) * 1024);
 
     while (fscanf(ifp, "%c", &count) != EOF && i < 1024)
-        text[i++] = count;
+    {
+        text[i] = count;
+        i++;
+    }
 
     text[i] = '\0';
     fclose(ifp);
@@ -97,23 +74,13 @@ int main(int argc, char **argv)
     switch (size)
     {
     case 8:
-        EightBit = CalcEightBit(text);
-        print(text);
-        printf("\n%2d bit checksum is %8lx for all %4d chars\n", size, EightBit & 0xff, (int)strlen(text));
+        printf("%s\n", text);
         break;
     case 16:
-        if (strlen(text) % 2)
-            strcat(text, "X");
-        print(text);
-        printf("\n");
-        SixteenBit = CalcSixteenBit(text, size, SixteenBit);
+        printf("%s\n", text);
         break;
     case 32:
-        while (strlen(text) % 4)
-            strcat(text, "X");
-        print(text);
-        printf("\n");
-        ThirtyTwoBit = CalcThirtyTwoBit(text, size, ThirtyTwoBit);
+        printf("%s\n", text);
         break;
     default:
         break;

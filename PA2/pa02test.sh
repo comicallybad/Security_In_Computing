@@ -1,42 +1,42 @@
 #!/bin/bash
 case $1 in
-    checksum.c)
+    pa02.c)
 	rm a.out
-	gcc checksum.c 
+	gcc pa02.c 
 	if [ $? -ne 0 ]; then 
-	    echo "Compile of checksum.c failed"
+	    echo "Compile of pa02.c failed"
 	    echo "Good bye!"
 	    exit 1 
 	fi
 	EXE="./a.out"
 	;;
-    checksum.cpp)
+    pa02.cpp)
 	rm a.out
-	g++ checksum.cpp
+	g++ pa02.cpp
 	if [ $? -ne 0 ]; then 
-	    echo "Compile of checksum.cpp failed"
+	    echo "Compile of pa02.cpp failed"
 	    echo "Good bye!"
 	    exit 1 
 	fi
 	EXE="./a.out"
 	;;
-    checksum.java)
-	rm checksum.class
-	javac checksum.java
+    pa02.java)
+	rm pa02.class
+	javac pa02.java
 	if [ $? -ne 0 ]; then 
-	    echo "Compile of checksum.java failed"
+	    echo "Compile of pa02.java failed"
 	    echo "Good bye!"
 	    exit 1 
 	fi
-	EXE="java checksum"
+	EXE="java pa02"
 	;;
 *)
     echo "Invalid source file name"
-    echo "->  should be checksum.c, checksum.cpp, or checksum.java"
+    echo "->  should be pa02.c, pa02.cpp, or pa02.java"
     exit 1
 esac
 
-echo "Compile of checksum succeded."
+echo "Compile of pa02 succeded."
 
 echo "-> Case #1 - in10A.txt - 8 bit checksum"
 eval $EXE in10A.txt 8 >s10A-Output8.txt

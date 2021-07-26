@@ -1,23 +1,23 @@
 #!/bin/bash
 case $1 in
-checksum.c)
+pa02.c)
 	rm a.out
-	gcc checksum.c 
+	gcc pa02.c 
 	EXE="./a.out"
 	;;
-checksum.cpp)
+pa02.cpp)
 	rm a.out
-	g++ checksum.cpp
+	g++ pa02.cpp
 	EXE="./a.out"
 	;;
-checksum.java)
-	rm checksum.class
-	javac checksum.java
-	EXE="java checksum"
+pa02.java)
+	rm pa02.class
+	javac pa02.java
+	EXE="java pa02"
 	;;
 *)
     echo "Invalid source file name"
-    echo "->  should be checksum.c, checksum.cpp, or checksum.java"
+    echo "->  should be pa02.c, pa02.cpp, or pa02.java"
 	exit 1
 esac
 
