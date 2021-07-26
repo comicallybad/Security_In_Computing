@@ -34,6 +34,32 @@ int CalcEightBit(char *text)
     return result;
 }
 
+int CalcSixteenBit(char *text, int checksum_size, unsigned long int result)
+{
+    for (int i = 0; i < strlen(text);)
+    {
+        result += text[i] << 8;
+        result += (text[i + 1]);
+        i += 2;
+    }
+    printf("%2d bit checksum is %8lx for all %4d chars\n", checksum_size, result & 0xffff, (int)strlen(text));
+    return result;
+}
+
+int CalcThirtyTwoBit(char *text, int checksum_size, unsigned long int result)
+{
+    for (int i = 0; i < strlen(text);)
+    {
+        result += text[i] << 24;
+        result += (text[i + 1]) << 16;
+        result += (text[i + 2]) << 8;
+        result += (text[i + 3]);
+        i += 4;
+    }
+    printf("%2d bit checksum is %8lx for all %4d chars\n", checksum_size, result & 0xffffffff, (int)strlen(text));
+    return result;
+}
+
 void print(char *text)
 {
     for (int i = 0; i < strlen(text); i++)
@@ -74,13 +100,23 @@ int main(int argc, char **argv)
     switch (size)
     {
     case 8:
-        printf("%s\n", text);
+        EightBit = CalcEightBit(text);
+        print(text);
+        printf("\n%2d bit checksum is %8lx for all %4d chars\n", size, EightBit & 0xff, (int)strlen(text));
         break;
     case 16:
-        printf("%s\n", text);
+        if (strlen(text) % 2)
+            strcat(text, "X");
+        print(text);
+        printf("\n");
+        SixteenBit = CalcSixteenBit(text, size, SixteenBit);
         break;
     case 32:
-        printf("%s\n", text);
+        while (strlen(text) % 4)
+            strcat(text, "X");
+        print(text);
+        printf("\n");
+        ThirtyTwoBit = CalcThirtyTwoBit(text, size, ThirtyTwoBit);
         break;
     default:
         break;
